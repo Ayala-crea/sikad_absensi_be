@@ -3,11 +3,21 @@ package handler
 import (
 	"fmt"
 	"net/http"
+	"sikad_absensi/config"
 
 	vercel "github.com/tbxark/g4vercel"
 )
 
 func Handler(w http.ResponseWriter, r *http.Request) {
+
+	// Hubungkan ke database
+	DB := config.BimbinganDB()
+	if DB != nil {
+		fmt.Println("Database connection is successful.")
+	} else {
+		fmt.Println("Failed to connect to the database.")
+	}
+
 	server := vercel.New()
 
 	server.GET("/", func(context *vercel.Context) {
